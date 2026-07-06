@@ -75,7 +75,7 @@ export default function AboutPage() {
             <Eye className="h-8 w-8 text-accent" />
             <h2 className="mt-5 text-2xl font-semibold">Our vision</h2>
             <p className="mt-3 text-muted">
-              A world where no great photo is discarded for being "too small." Where creators rescue
+              A world where no great photo is discarded for being &quot;too small.&quot; Where creators rescue
               instead of redo, and where image quality is never a barrier to a good idea.
             </p>
           </Card>

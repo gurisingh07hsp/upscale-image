@@ -12,7 +12,6 @@ import {
   Check,
   X,
   ZoomIn,
-  Layers,
   ScanLine,
   Save,
 } from 'lucide-react';

@@ -1,7 +1,7 @@
 import { ButtonHTMLAttributes } from 'react';
 import { cn } from '@/lib/cn';
 
-interface ShimmerButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
+type ShimmerButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
 
 export function ShimmerButton({ className, children, ...props }: ShimmerButtonProps) {
   return (

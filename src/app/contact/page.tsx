@@ -127,7 +127,7 @@ export default function ContactPage() {
                 )}
               </Button>
 
-              {status === 'sent' && <p className="text-center text-sm text-accent">Thanks! We'll get back to you shortly.</p>}
+              {status === 'sent' && <p className="text-center text-sm text-accent">Thanks! We&apos;ll get back to you shortly.</p>}
             </form>
           </Card>
         </div>

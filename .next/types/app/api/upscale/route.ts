@@ -1,4 +1,4 @@
-// File: /Users/drmac/Downloads/img upscale/src/app/api/upscale/route.ts
+// File: D:\work\upscale-image\src\app\api\upscale\route.ts
 import * as entry from '../../../../../src/app/api/upscale/route.js'
 import type { NextRequest } from 'next/server.js'
 

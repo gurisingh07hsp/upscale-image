@@ -1,4 +1,4 @@
-import Replicate from 'replicate';
+import Replicate, { FileOutput } from 'replicate';
 import { NextRequest, NextResponse } from 'next/server';
 
 const replicate = new Replicate({
@@ -19,21 +19,11 @@ export async function POST(request: NextRequest) {
       scale_factor: scale || 2
     };
     
-    const output = await replicate.run("philz1337x/clarity-upscaler", { input });
+    const output = await replicate.run("philz1337x/clarity-upscaler:dfad41707589d68ecdccd1dfa600d55a208f9310748e44bfe35b4a6291453d5e", { input });
+    const file = (output as FileOutput[])[0];
+    const url = file.url();
 
-    // Get the output URL (output is an array, take first element)
-    let outputUrl: string;
-    if (Array.isArray(output) && output.length > 0) {
-      outputUrl = output[0];
-    } else if (typeof output === 'string') {
-      outputUrl = output;
-    } else if (output && typeof output === 'object' && 'url' in output && typeof output.url === 'function') {
-      outputUrl = output.url();
-    } else {
-      throw new Error('Invalid Replicate output format');
-    }
-
-    return NextResponse.json({ output: outputUrl });
+    return NextResponse.json({ output: url });
   } catch (error) {
     console.error('Replicate API error:', error);
     return NextResponse.json(

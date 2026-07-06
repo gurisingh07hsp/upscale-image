@@ -10,7 +10,7 @@ export default function NotFound() {
       </div>
       <h1 className="mt-6 text-4xl font-semibold tracking-tight">404</h1>
       <p className="mt-3 max-w-sm text-muted">
-        We couldn't find that page. It may have been moved or never existed.
+        We couldn&apos;t find that page. It may have been moved or never existed.
       </p>
       <Link href="/">
         <Button className="mt-8">Back home</Button>
