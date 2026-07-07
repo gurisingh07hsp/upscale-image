@@ -1,10 +1,10 @@
 {
+  "/api/upscale/route": "app/api/upscale/route.js",
+  "/_not-found/page": "app/_not-found/page.js",
   "/about/page": "app/about/page.js",
+  "/contact/page": "app/contact/page.js",
   "/gallery/page": "app/gallery/page.js",
   "/pricing/page": "app/pricing/page.js",
   "/page": "app/page.js",
-  "/contact/page": "app/contact/page.js",
-  "/upscale/page": "app/upscale/page.js",
-  "/api/upscale/route": "app/api/upscale/route.js",
-  "/_not-found/page": "app/_not-found/page.js"
+  "/upscale/page": "app/upscale/page.js"
 }

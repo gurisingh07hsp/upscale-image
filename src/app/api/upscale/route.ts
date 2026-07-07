@@ -19,8 +19,9 @@ export async function POST(request: NextRequest) {
       scale_factor: scale || 2
     };
     
-    const output = await replicate.run("philz1337x/clarity-upscaler:dfad41707589d68ecdccd1dfa600d55a208f9310748e44bfe35b4a6291453d5e", { input });
-    const file = (output as FileOutput[])[0];
+    // const output = await replicate.run("philz1337x/clarity-upscaler:dfad41707589d68ecdccd1dfa600d55a208f9310748e44bfe35b4a6291453d5e", { input });
+    const output = await replicate.run("nightmareai/real-esrgan", { input });
+    const file = output as FileOutput;
     const url = file.url();
 
     return NextResponse.json({ output: url });
