@@ -140,22 +140,60 @@ export default function UpscalePage() {
     a.click();
   }, [result, scale]);
 
+  // useEffect(() => {
+  //   const onMove = (e: MouseEvent) => {
+  //     if (!dragRef.current || !compareRef.current) return;
+  //     const rect = compareRef.current.getBoundingClientRect();
+  //     const x = e.clientX - rect.left;
+  //     const p = Math.max(0, Math.min(100, (x / rect.width) * 100));
+  //     setComparePos(p);
+  //   };
+  //   const onUp = () => (dragRef.current = false);
+  //   window.addEventListener('mousemove', onMove);
+  //   window.addEventListener('mouseup', onUp);
+  //   return () => {
+  //     window.removeEventListener('mousemove', onMove);
+  //     window.removeEventListener('mouseup', onUp);
+  //   };
+  // }, []);
+
   useEffect(() => {
-    const onMove = (e: MouseEvent) => {
-      if (!dragRef.current || !compareRef.current) return;
-      const rect = compareRef.current.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const p = Math.max(0, Math.min(100, (x / rect.width) * 100));
-      setComparePos(p);
-    };
-    const onUp = () => (dragRef.current = false);
-    window.addEventListener('mousemove', onMove);
-    window.addEventListener('mouseup', onUp);
-    return () => {
-      window.removeEventListener('mousemove', onMove);
-      window.removeEventListener('mouseup', onUp);
-    };
-  }, []);
+  const updateFromClientX = (clientX: number) => {
+    if (!compareRef.current) return;
+    const rect = compareRef.current.getBoundingClientRect();
+    const x = clientX - rect.left;
+    const p = Math.max(0, Math.min(100, (x / rect.width) * 100));
+    setComparePos(p);
+  };
+
+  const onMove = (e: MouseEvent) => {
+    if (!dragRef.current) return;
+    updateFromClientX(e.clientX);
+  };
+  const onUp = () => (dragRef.current = false);
+
+  const onTouchMove = (e: TouchEvent) => {
+    if (!dragRef.current) return;
+    // prevent the page from scrolling while dragging the slider
+    e.preventDefault();
+    updateFromClientX(e.touches[0].clientX);
+  };
+  const onTouchEnd = () => (dragRef.current = false);
+
+  window.addEventListener('mousemove', onMove);
+  window.addEventListener('mouseup', onUp);
+  window.addEventListener('touchmove', onTouchMove, { passive: false });
+  window.addEventListener('touchend', onTouchEnd);
+  window.addEventListener('touchcancel', onTouchEnd);
+
+  return () => {
+    window.removeEventListener('mousemove', onMove);
+    window.removeEventListener('mouseup', onUp);
+    window.removeEventListener('touchmove', onTouchMove);
+    window.removeEventListener('touchend', onTouchEnd);
+    window.removeEventListener('touchcancel', onTouchEnd);
+  };
+}, []);
 
   const outW = dims ? dims.w * scale : 0;
   const outH = dims ? dims.h * scale : 0;
@@ -163,7 +201,7 @@ export default function UpscalePage() {
   return (
     <div className="relative min-h-screen pt-24 pb-20">
       <div className="absolute inset-0 -z-10 bg-grid [mask-image:radial-gradient(ellipse_at_top,black_20%,transparent_70%)]" />
-      <div className="absolute left-1/2 top-0 -z-10 h-[400px] w-[700px] -translate-x-1/2 rounded-full bg-accent/15 blur-[120px]" />
+      <div className="absolute left-1/2 top-0 -z-10 h-[400px] lg:w-[700px] -translate-x-1/2 rounded-full bg-accent/15 blur-[120px]" />
 
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
@@ -242,15 +280,27 @@ export default function UpscalePage() {
                     <div className="pointer-events-none absolute right-3 top-3 rounded-full bg-accent/80 px-3 py-1 text-xs text-white backdrop-blur">
                       After · {result.width}×{result.height}
                     </div>
+                    {/* <div
+                      className="absolute inset-y-0"
+                      style={{ left: 0, width: `${comparePos}%` }}
+                      onMouseDown={() => (dragRef.current = true)}
+                    /> */}
+                    {/* <div
+                      className="absolute inset-y-0 right-0"
+                      style={{ width: `${100 - comparePos}%` }}
+                      onMouseDown={() => (dragRef.current = true)}
+                    /> */}
                     <div
                       className="absolute inset-y-0"
                       style={{ left: 0, width: `${comparePos}%` }}
                       onMouseDown={() => (dragRef.current = true)}
+                      onTouchStart={() => (dragRef.current = true)}
                     />
                     <div
                       className="absolute inset-y-0 right-0"
                       style={{ width: `${100 - comparePos}%` }}
                       onMouseDown={() => (dragRef.current = true)}
+                      onTouchStart={() => (dragRef.current = true)}
                     />
                   </div>
                 ) : (
