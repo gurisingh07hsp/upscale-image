@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { Sparkles, Github, Twitter, Linkedin } from 'lucide-react';
+import {  Github, Twitter, Linkedin } from 'lucide-react';
+import Image from 'next/image';
 
 const cols = [
   {
@@ -32,11 +33,8 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="grid gap-10 md:grid-cols-5">
           <div className="md:col-span-2">
-            <Link href="/" className="flex items-center gap-2 font-semibold">
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent/15 text-accent ring-1 ring-accent/30">
-                <Sparkles className="h-4 w-4" />
-              </span>
-              <span>PixelLift</span>
+            <Link href="/" className="flex items-center gap-2 font-semibold tracking-tight">
+              <Image src="/logo.png" alt="PixelLift Logo" width={120} height={50} />
             </Link>
             <p className="mt-4 max-w-xs text-sm text-muted">
               AI-powered image upscaling that turns low-resolution photos into

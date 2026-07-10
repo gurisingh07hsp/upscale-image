@@ -3,8 +3,9 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Sparkles, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/cn';
+import Image from 'next/image';
 
 const links = [
   { label: 'Home', path: '/' },
@@ -40,10 +41,7 @@ export function Navbar() {
     >
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2 font-semibold tracking-tight">
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent/15 text-accent ring-1 ring-accent/30">
-            <Sparkles className="h-4 w-4" />
-          </span>
-          <span className="text-[15px]">PixelLift</span>
+            <Image src="/logo.png" alt="PixelLift Logo" width={120} height={50} />
         </Link>
 
         <div className="hidden items-center gap-1 md:flex">
